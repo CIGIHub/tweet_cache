@@ -12,6 +12,7 @@ setup(
     version='0.1',
     packages=['twitter'],
     install_requires=[
+        "pytz",
         "django",
         "tweepy",
     ],
