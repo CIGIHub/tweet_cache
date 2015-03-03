@@ -61,6 +61,8 @@ def get_tweets(twitter_user, user, api):
 
 
 def get_followers(twitter_user, user, api):
+    user.current_followers = twitter_user.followers_count
+    user.save()
     FollowersStats.objects.create(
         user=user,
         followers=twitter_user.followers_count,

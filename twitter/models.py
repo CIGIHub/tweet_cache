@@ -14,13 +14,11 @@ class User(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    current_followers = models.PositiveIntegerField(default=0)
+
     @property
     def followers(self):
-        stat = self.followersstats_set.first()
-        if stat is None:
-            return 'n/a'
-        else:
-            return stat.followers
+        return self.current_followers
 
     def __str__(self):
         return self.screen_name
