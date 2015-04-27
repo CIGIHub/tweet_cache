@@ -13,7 +13,7 @@ import tweepy
 from .models import User, Tweet, FollowersStats, Analytics, AnalyticsReport
 
 
-def management_load_tweets_and_analytics():
+def management_load_tweets():
     right_now = now()
     api = get_api()
     for user in User.objects.filter(active=True):
@@ -24,9 +24,27 @@ def management_load_tweets_and_analytics():
             get_tweets_and_followers(user, api)
         time.sleep(5)
 
+
+def management_load_analytics():
+    right_now = now()
+    api = get_api()
+    for user in User.objects.filter(active=True):
+        if user.user_id == '':
+            user = update_user(user, api)
+
         if user.capture_analytics == True and user.user_id != '':
             get_analytics(right_now, user, api)
-            # TODO: only once a month, and for the last month
+        time.sleep(10)
+
+
+def management_load_analytics_report():
+    right_now = now()
+    api = get_api()
+    for user in User.objects.filter(active=True):
+        if user.user_id == '':
+            user = update_user(user, api)
+
+        if user.capture_analytics == True and user.user_id != '':
             get_analytics_report(right_now, user, api)
         time.sleep(10)
 
@@ -207,7 +225,7 @@ def get_analytics_report(current_time, user, api):
         if tweet.retweet_count > 0:
             retweet_count += 1
         if tweet.favorite_count is not None and tweet.favorite_count > 0:
-            favorite_count +=1
+            favorite_count += 1
 
         if i % 200 == 0:
             time.sleep(5)
