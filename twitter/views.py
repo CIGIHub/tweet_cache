@@ -17,7 +17,13 @@ def analytics_compare_example(request, template="analytics_compare_example.html"
     data = {} #map from users to the rows of data.
 
     for user in users:
-        report_data = models.AnalyticsReport.objects.get(user=user, date__year=year, date__month=month)
+        report_data = models.AnalyticsReport.objects.filter(user=user, date__year=year, date__month=month)
+        tweets_reweeted_count = 0
+        tweets_favorited_count = 0
+        if len(report_data) > 0:
+            tweets_reweeted_count = report_data.all()[0].tweets_reweeted_count
+            tweets_favorited_count = report_data.all()[0].tweets_favorited_count
+
         fixed_data = models.Analytics.objects.filter(user=user, date__year=year, date__month=month).first()
 
         analytics_data = (models.Analytics.objects
@@ -39,8 +45,8 @@ def analytics_compare_example(request, template="analytics_compare_example.html"
                 followers = fixed_data.followers,
                 following = fixed_data.following,
                 listed = fixed_data.listed,
-                tweets_reweeted_count=report_data.tweets_reweeted_count,
-                tweets_favorited_count=report_data.tweets_favorited_count,
+                tweets_reweeted_count=tweets_reweeted_count,
+                tweets_favorited_count=tweets_favorited_count,
             )
         )
         data[user] = analytics_data
