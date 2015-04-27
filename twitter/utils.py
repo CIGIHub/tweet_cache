@@ -147,7 +147,7 @@ def process_tweets(tweets_cursor, user):
             not_created += 1
 
         if not_created > 10:
-            break;
+            break
 
 
 tweet_analytic_keys = [
@@ -227,7 +227,7 @@ def get_analytics_report(current_time, user, api):
         if tweet.favorite_count is not None and tweet.favorite_count > 0:
             favorite_count += 1
 
-        if i % 200 == 0:
+        if i % 100 == 0:
             time.sleep(5)
 
     AnalyticsReport.objects.update_or_create(
