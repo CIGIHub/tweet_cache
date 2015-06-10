@@ -33,6 +33,9 @@ class User(models.Model):
     def __str__(self):
         return self.screen_name
 
+    class Meta:
+        verbose_name = "Twitter User"
+
 
 @python_2_unicode_compatible
 class Tweet(models.Model):
