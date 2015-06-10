@@ -5,6 +5,7 @@ from collections import namedtuple
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.timezone import now
 
 import tweepy
 
