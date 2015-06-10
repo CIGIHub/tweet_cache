@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from twitter.utils import management_load_tweets_and_analytics
+from twitter.utils import management_load_tweets
 
 
 class Command(BaseCommand):
@@ -8,4 +8,4 @@ class Command(BaseCommand):
     def handle(self, **options):
 
 
-        management_load_tweets_and_analytics()
+        management_load_tweets()

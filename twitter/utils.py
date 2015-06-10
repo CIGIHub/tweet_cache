@@ -13,7 +13,7 @@ import tweepy
 from .models import User, Tweet, FollowersStats, Analytics, AnalyticsReport
 
 
-def management_load_tweets_and_analytics():
+def management_load_tweets():
     right_now = now()
     api = get_api()
     for user in User.objects.filter(active=True):
@@ -24,11 +24,12 @@ def management_load_tweets_and_analytics():
             get_tweets_and_followers(user, api)
         time.sleep(5)
 
-        if user.capture_analytics == True and user.user_id != '':
-            get_analytics(right_now, user, api)
+        # Done by social.py now.
+        #if user.capture_analytics == True and user.user_id != '':
+        #    get_analytics(right_now, user, api)
             # TODO: only once a month, and for the last month
-            get_analytics_report(right_now, user, api)
-        time.sleep(10)
+        #    get_analytics_report(right_now, user, api)
+        #time.sleep(10)
 
 
 _api = None
