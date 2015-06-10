@@ -24,29 +24,12 @@ def management_load_tweets():
             get_tweets_and_followers(user, api)
         time.sleep(5)
 
-
-def management_load_analytics():
-    right_now = now()
-    api = get_api()
-    for user in User.objects.filter(active=True):
-        if user.user_id == '':
-            user = update_user(user, api)
-
-        if user.capture_analytics == True and user.user_id != '':
-            get_analytics(right_now, user, api)
-        time.sleep(10)
-
-
-def management_load_analytics_report():
-    right_now = now()
-    api = get_api()
-    for user in User.objects.filter(active=True):
-        if user.user_id == '':
-            user = update_user(user, api)
-
-        if user.capture_analytics == True and user.user_id != '':
-            get_analytics_report(right_now, user, api)
-        time.sleep(10)
+        # Done by social.py now.
+        #if user.capture_analytics == True and user.user_id != '':
+        #    get_analytics(right_now, user, api)
+            # TODO: only once a month, and for the last month
+        #    get_analytics_report(right_now, user, api)
+        #time.sleep(10)
 
 
 _api = None
