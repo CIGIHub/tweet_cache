@@ -22,3 +22,17 @@ Add twitter users to through the admin screen.
 Run python manage.py load_tweets
 
 Depends on tweepy.
+
+Socializr Integration
+---------------------
+
+tweet_cache also provided a `social.py` file which expects to register
+with django-socializr (https://github.com/CIGIHub/django-socializr) a
+tool for getting analytics from multiple apis.
+
+tweet_cache can be used without socializr, but be careful to not import
+social.py.
+
+To use with django-socializr it should be as simple as running
+`manage.py socializr_update`. tweet_cache registers itself with
+socializr.
