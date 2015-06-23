@@ -20,6 +20,7 @@ class AnalyticsAdmin(admin.ModelAdmin):
         'link_count',
         'hashtag_count',
     )
+    list_filter = ('user',)
 
 
 class AnalyticsReportAdmin(admin.ModelAdmin):
