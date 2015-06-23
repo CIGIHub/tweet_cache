@@ -44,7 +44,7 @@ class Tweet(models.Model):
     time = models.DateTimeField()
     account = models.CharField(max_length=30)
     profile_image_url = models.CharField(max_length=256)
-    text = models.CharField(max_length=140)
+    text = models.CharField(max_length=1028)
     processed_text = models.CharField(max_length=1028, blank=True, null=True)
     hide = models.BooleanField(default=False)
 
