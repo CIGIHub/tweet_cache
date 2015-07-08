@@ -205,10 +205,19 @@ def get_analytics_report(current_time, user, api):
 
     tweets_cursor = tweepy.Cursor(api.user_timeline, user_id=user.user_id, include_rts=False)
     for i, tweet in enumerate(tweets_cursor.items()):
+
+        tweet_date = make_aware(tweet.created_at, utc).date()
+
+        if tweet_date.month > month_date.month:
+            continue
+        if tweet_date.month < month_date.month:
+            break
+
+
         if tweet.retweet_count > 0:
-            retweet_count += 1
+            retweet_count += tweet.retweet_count
         if tweet.favorite_count is not None and tweet.favorite_count > 0:
-            favorite_count += 1
+            favorite_count += tweet.favorite_count
 
         if i % 100 == 0:
             time.sleep(5)

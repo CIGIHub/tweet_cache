@@ -36,8 +36,12 @@ class TwitterConfig(SocializrConfig):
         for user in User.objects.filter(active=True):
             if user.capture_analytics == True and user.user_id != '':
                 get_analytics(right_now, user, api)
-                if right_now.day == 1:
-                    get_analytics_report(right_now, user, api)
+                if right_now.day == 5:
+                    get_analytics_report(
+                        right_now - datetime.timedelta(5),
+                        user,
+                        api
+                    )
             time.sleep(10)
 
 
