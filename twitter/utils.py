@@ -203,7 +203,7 @@ def get_analytics_report(current_time, user, api):
     retweet_count = 0
     favorite_count = 0
 
-    tweets_cursor = tweepy.Cursor(api.user_timeline, user_id=user.user_id, include_rts=False)
+    tweets_cursor = tweepy.Cursor(api.user_timeline, user_id=user.user_id, include_rts=False, count=200)
     for i, tweet in enumerate(tweets_cursor.items()):
 
         tweet_date = make_aware(tweet.created_at, utc).date()
@@ -219,8 +219,8 @@ def get_analytics_report(current_time, user, api):
         if tweet.favorite_count is not None and tweet.favorite_count > 0:
             favorite_count += tweet.favorite_count
 
-        if i % 100 == 0:
-            time.sleep(5)
+        if i % 200 == 0:
+            time.sleep(10)
 
     AnalyticsReport.objects.update_or_create(
         user=user,
